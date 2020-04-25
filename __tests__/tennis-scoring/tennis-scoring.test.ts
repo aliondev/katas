@@ -42,31 +42,15 @@ describe('Tennis Scoring kata', () => {
   });
 
   it('handles the deuced case', () => {
-    const game = new Game();
+    const game = aGameWithDeucedPlayers();
     const deucedScore = Score.ofDeuced();
-
-    game.winPointForPlayer(1);
-    game.winPointForPlayer(1);
-    game.winPointForPlayer(1);
-
-    game.winPointForPlayer(2);
-    game.winPointForPlayer(2);
-    game.winPointForPlayer(2);
 
     expect(game.scoreOfPlayer(1).equals(deucedScore)).toBe(true);
     expect(game.scoreOfPlayer(2).equals(deucedScore)).toBe(true);
   });
 
   it('handles when players are deuced and one of them scores', () => {
-    const game = new Game();
-
-    game.winPointForPlayer(1);
-    game.winPointForPlayer(1);
-    game.winPointForPlayer(1);
-
-    game.winPointForPlayer(2);
-    game.winPointForPlayer(2);
-    game.winPointForPlayer(2);
+    const game = aGameWithDeucedPlayers();
 
     game.winPointForPlayer(1);
 
@@ -74,6 +58,20 @@ describe('Tennis Scoring kata', () => {
     expect(game.scoreOfPlayer(2).equals(Score.of40())).toBe(true);
   });
 });
+
+function aGameWithDeucedPlayers() {
+  const game = new Game();
+
+  game.winPointForPlayer(1);
+  game.winPointForPlayer(1);
+  game.winPointForPlayer(1);
+
+  game.winPointForPlayer(2);
+  game.winPointForPlayer(2);
+  game.winPointForPlayer(2);
+
+  return game;
+}
 
 function aPlayerNumber(): PlayerNumber {
   return Math.random() > 0.5 ? 2 : 1;
