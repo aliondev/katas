@@ -13,13 +13,20 @@ export class Game {
   }
 
   winPointForPlayer(playerNumber: PlayerNumber) {
+    const oponent = this.getOponentOf(playerNumber);
     const player = this.getPlayer(playerNumber);
-    player.winPoint();
 
-    this.manageDeuce();
+    if (player.score().equals(Score.of40()) && oponent.hasAdvantage()) {
+      player.setDeuced();
+      oponent.setDeuced();
+    } else {
+      player.winPoint();
+    }
+
+    this.manageDeuceState();
   }
 
-  private manageDeuce() {
+  private manageDeuceState() {
     const bothHave40 =
       this.player1.score().equals(Score.of40()) &&
       this.player2.score().equals(Score.of40());
@@ -40,6 +47,10 @@ export class Game {
 
   private getPlayer(playerNumber: PlayerNumber) {
     return playerNumber === 1 ? this.player1 : this.player2;
+  }
+
+  private getOponentOf(playerNumber: PlayerNumber) {
+    return playerNumber === 1 ? this.player2 : this.player1;
   }
 
   scoreOfPlayer(playerNumber: PlayerNumber): Score {
