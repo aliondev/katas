@@ -52,11 +52,11 @@ export class Game {
     }
 
     if (this.player1.isDeuced() && this.player2.hasAdvantage()) {
-      this.player1.removeDeuced();
+      this.player1.unsetDeuced();
     }
 
     if (this.player2.isDeuced() && this.player1.hasAdvantage()) {
-      this.player2.removeDeuced();
+      this.player2.unsetDeuced();
     }
   }
 

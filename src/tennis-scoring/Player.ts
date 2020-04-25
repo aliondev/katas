@@ -13,7 +13,7 @@ export class Player {
     this._score = Score.ofDeuced();
   }
 
-  removeDeuced() {
+  unsetDeuced() {
     this._score = Score.of40();
   }
 
