@@ -13,11 +13,8 @@ export class Game {
   }
 
   winPointForPlayer(playerNumber: PlayerNumber) {
-    if (playerNumber === 1) {
-      this.player1.winPoint();
-    } else {
-      this.player2.winPoint();
-    }
+    const player = this.getPlayer(playerNumber);
+    player.winPoint();
 
     this.manageDeuce();
   }
@@ -47,8 +44,13 @@ export class Game {
     }
   }
 
+  private getPlayer(playerNumber: PlayerNumber) {
+    return playerNumber === 1 ? this.player1 : this.player2;
+  }
+
   scoreOfPlayer(playerNumber: PlayerNumber): Score {
-    return playerNumber === 1 ? this.player1.score() : this.player2.score();
+    const player = this.getPlayer(playerNumber);
+    return player.score();
   }
 
   completed = (): boolean => !!this.winner();
