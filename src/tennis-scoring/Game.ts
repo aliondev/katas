@@ -26,6 +26,21 @@ export class Game {
     this.manageDeuceState();
   }
 
+  scoreOfPlayer(playerNumber: PlayerNumber): Score {
+    const player = this.getPlayer(playerNumber);
+    return player.score();
+  }
+
+  completed = (): boolean => !!this.winner();
+
+  winner() {
+    if (this.player1.isWinner()) {
+      return 1;
+    } else if (this.player2.isWinner()) {
+      return 2;
+    }
+  }
+
   private manageDeuceState() {
     const bothHave40 =
       this.player1.hasScore(Score.of40()) &&
@@ -51,20 +66,5 @@ export class Game {
 
   private getOponentOf(playerNumber: PlayerNumber) {
     return playerNumber === 1 ? this.player2 : this.player1;
-  }
-
-  scoreOfPlayer(playerNumber: PlayerNumber): Score {
-    const player = this.getPlayer(playerNumber);
-    return player.score();
-  }
-
-  completed = (): boolean => !!this.winner();
-
-  winner() {
-    if (this.player1.isWinner()) {
-      return 1;
-    } else if (this.player2.isWinner()) {
-      return 2;
-    }
   }
 }
