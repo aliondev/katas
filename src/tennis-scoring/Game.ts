@@ -16,7 +16,7 @@ export class Game {
     const oponent = this.getOponentOf(playerNumber);
     const player = this.getPlayer(playerNumber);
 
-    if (player.score().equals(Score.of40()) && oponent.hasAdvantage()) {
+    if (player.hasScore(Score.of40()) && oponent.hasAdvantage()) {
       player.setDeuced();
       oponent.setDeuced();
     } else {
@@ -28,8 +28,8 @@ export class Game {
 
   private manageDeuceState() {
     const bothHave40 =
-      this.player1.score().equals(Score.of40()) &&
-      this.player2.score().equals(Score.of40());
+      this.player1.hasScore(Score.of40()) &&
+      this.player2.hasScore(Score.of40());
 
     if (bothHave40) {
       this.player1.setDeuced();

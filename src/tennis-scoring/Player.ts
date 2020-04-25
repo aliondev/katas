@@ -14,10 +14,14 @@ export class Player {
     this._score = Score.of40();
   }
 
+  hasScore(score: Score) {
+    return this._score.equals(score);
+  }
+
   isDeuced(): boolean {
-    return this._score.equals(Score.ofDeuced());
+    return this.hasScore(Score.ofDeuced());
   }
   hasAdvantage(): boolean {
-    return this._score.equals(Score.ofAdvantage());
+    return this.hasScore(Score.ofAdvantage());
   }
 }
