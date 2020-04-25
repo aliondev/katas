@@ -4,21 +4,22 @@ import { Game, PlayerNumber } from '../../src/tennis-scoring/Game';
 
 describe('Tennis Scoring kata', () => {
   it('allows players to score', () => {
-    const player = new Player();
+    const game = new Game();
+    const playerNumber = aPlayerNumber();
 
-    expect(player.hasScore(Score.of0())).toBe(true);
+    expect(game.scoreOfPlayer(playerNumber).equals(Score.of0())).toBe(true);
 
-    player.winPoint();
-    expect(player.hasScore(Score.of15())).toBe(true);
+    game.winPointForPlayer(playerNumber);
+    expect(game.scoreOfPlayer(playerNumber).equals(Score.of15())).toBe(true);
 
-    player.winPoint();
-    expect(player.hasScore(Score.of30())).toBe(true);
+    game.winPointForPlayer(playerNumber);
+    expect(game.scoreOfPlayer(playerNumber).equals(Score.of30())).toBe(true);
 
-    player.winPoint();
-    expect(player.hasScore(Score.of40())).toBe(true);
+    game.winPointForPlayer(playerNumber);
+    expect(game.scoreOfPlayer(playerNumber).equals(Score.of40())).toBe(true);
 
-    player.winPoint();
-    expect(player.hasScore(Score.ofGame())).toBe(true);
+    game.winPointForPlayer(playerNumber);
+    expect(game.scoreOfPlayer(playerNumber).equals(Score.ofGame())).toBe(true);
   });
 
   it('does not have a winner and is not completed when it starts', () => {
@@ -28,7 +29,7 @@ describe('Tennis Scoring kata', () => {
     expect(game.winner()).toBe(undefined);
   });
 
-  it('does not have a winner and is not completed if a player has not reach the max score', () => {
+  it('does not have a winner and is not completed if a player has not reached the max score', () => {
     const game = new Game();
     const playerNumber = aPlayerNumber();
 
