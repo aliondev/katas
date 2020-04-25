@@ -62,8 +62,8 @@ export class Game {
 
   winner() {
     const winnerScore = Score.ofGame();
-    const player1IsWinner = this.player1.score().equals(winnerScore);
-    const player2IsWinner = this.player2.score().equals(winnerScore);
+    const player1IsWinner = this.player1.hasScore(winnerScore);
+    const player2IsWinner = this.player2.hasScore(winnerScore);
 
     if (player1IsWinner) {
       return 1;
