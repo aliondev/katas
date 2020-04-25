@@ -4,8 +4,8 @@ import { Score } from '../../src/tennis-scoring/Score';
 export type PlayerNumber = 1 | 2;
 
 export class Game {
-  player1: Player;
-  player2: Player;
+  private player1: Player;
+  private player2: Player;
 
   constructor() {
     this.player1 = new Player();
