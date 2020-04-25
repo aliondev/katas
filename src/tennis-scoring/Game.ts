@@ -14,20 +14,17 @@ export class Game {
   }
 
   winPointForPlayer(playerNumber: PlayerNumber) {
-    const oponent = this.getOponentOf(playerNumber);
     const player = this.getPlayer(playerNumber);
+    const oponent = this.getOponentOf(playerNumber);
 
-    if (this.completed()) {
-      throw new PointAfterGameCompletedError();
-    }
+    this.ensureGameIsNotCompleted();
 
     if (player.hasScore(Score.of40()) && oponent.hasAdvantage()) {
-      player.setDeuced();
-      oponent.setDeuced();
-    } else {
-      player.winPoint();
+      this.deucePlayers();
+      return;
     }
 
+    player.winPoint();
     this.manageDeuceState();
   }
 
@@ -46,14 +43,24 @@ export class Game {
     }
   }
 
+  private ensureGameIsNotCompleted() {
+    if (this.completed()) {
+      throw new PointAfterGameCompletedError();
+    }
+  }
+
+  private deucePlayers() {
+    this.player1.setDeuced();
+    this.player2.setDeuced();
+  }
+
   private manageDeuceState() {
     const bothHave40 =
       this.player1.hasScore(Score.of40()) &&
       this.player2.hasScore(Score.of40());
 
     if (bothHave40) {
-      this.player1.setDeuced();
-      this.player2.setDeuced();
+      this.deucePlayers();
     }
 
     if (this.player1.isDeuced() && this.player2.hasAdvantage()) {
