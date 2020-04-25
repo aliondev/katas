@@ -22,16 +22,18 @@ export class Score {
     return new Score(ScoreValue.GAME);
   }
   next(): Score {
-    if (this.equals(Score.of0())) {
-      return Score.of15();
-    } else if (this.equals(Score.of15())) {
-      return Score.of30();
-    } else if (this.equals(Score.of30())) {
-      return Score.of40();
-    } else if (this.equals(Score.ofDeuced())) {
-      return Score.ofAdvantage();
+    switch (this.value) {
+      case ScoreValue.ZERO:
+        return Score.of15();
+      case ScoreValue.FIFTEEN:
+        return Score.of30();
+      case ScoreValue.THIRTY:
+        return Score.of40();
+      case ScoreValue.DEUCED:
+        return Score.ofAdvantage();
+      default:
+        return Score.ofGame();
     }
-    return Score.ofGame();
   }
   equals(otherScore: Score) {
     return this.value === otherScore.value;
