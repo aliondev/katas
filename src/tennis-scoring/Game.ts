@@ -1,5 +1,6 @@
 import { Player } from '../../src/tennis-scoring/Player';
 import { Score } from '../../src/tennis-scoring/Score';
+import { PointAfterGameCompletedError } from './PointAfterGameCompletedError';
 
 export type PlayerNumber = 1 | 2;
 
@@ -15,6 +16,10 @@ export class Game {
   winPointForPlayer(playerNumber: PlayerNumber) {
     const oponent = this.getOponentOf(playerNumber);
     const player = this.getPlayer(playerNumber);
+
+    if (this.completed()) {
+      throw new PointAfterGameCompletedError();
+    }
 
     if (player.hasScore(Score.of40()) && oponent.hasAdvantage()) {
       player.setDeuced();

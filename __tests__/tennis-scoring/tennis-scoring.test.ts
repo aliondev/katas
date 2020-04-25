@@ -93,6 +93,14 @@ describe('Tennis Scoring kata', () => {
     expect(game.scoreOfPlayer(1).equals(deucedScore)).toBe(true);
     expect(game.scoreOfPlayer(2).equals(deucedScore)).toBe(true);
   });
+
+  it('handles when a game is completed and we try to win a point for a player', () => {
+    const game = aCompletedGame();
+
+    expect(() => game.winPointForPlayer(aPlayerNumber())).toThrowError(
+      'Trying to win points when game is completed',
+    );
+  });
 });
 
 function aGameWithDeucedPlayers() {
@@ -112,6 +120,14 @@ function aGameWithDeucedPlayers() {
 function aGameWithPlayerHavingAdvantage(playerNumber: PlayerNumber) {
   const game = aGameWithDeucedPlayers();
   game.winPointForPlayer(playerNumber);
+  return game;
+}
+
+function aCompletedGame() {
+  const game = aGameWithDeucedPlayers();
+  game.winPointForPlayer(1);
+  game.winPointForPlayer(1);
+
   return game;
 }
 
