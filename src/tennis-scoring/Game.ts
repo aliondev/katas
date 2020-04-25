@@ -50,8 +50,8 @@ export class Game {
   }
 
   private deucePlayers() {
-    this.player1.setDeuced();
-    this.player2.setDeuced();
+    this.player1.setDeuceScore();
+    this.player2.setDeuceScore();
   }
 
   private manageDeuceState() {
@@ -61,14 +61,17 @@ export class Game {
 
     if (bothHave40) {
       this.deucePlayers();
+      return;
     }
 
-    if (this.player1.isDeuced() && this.player2.hasAdvantage()) {
-      this.player1.unsetDeuced();
+    if (this.player1.hasDeuceScore() && this.player2.hasAdvantage()) {
+      this.player1.unsetDeuceScore();
+      return;
     }
 
-    if (this.player2.isDeuced() && this.player1.hasAdvantage()) {
-      this.player2.unsetDeuced();
+    if (this.player2.hasDeuceScore() && this.player1.hasAdvantage()) {
+      this.player2.unsetDeuceScore();
+      return;
     }
   }
 

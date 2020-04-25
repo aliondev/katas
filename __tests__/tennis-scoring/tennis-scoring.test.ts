@@ -53,16 +53,16 @@ describe('Tennis Scoring kata', () => {
     expect(game.winner()).toBe(playerNumber);
   });
 
-  it('handles the deuced case', () => {
-    const game = aGameWithDeucedPlayers();
-    const deucedScore = Score.ofDeuced();
+  it('handles the deuce case', () => {
+    const game = aGameWithDeuce();
+    const deuceScore = Score.ofDeuce();
 
-    expect(game.scoreOfPlayer(1).equals(deucedScore)).toBe(true);
-    expect(game.scoreOfPlayer(2).equals(deucedScore)).toBe(true);
+    expect(game.scoreOfPlayer(1).equals(deuceScore)).toBe(true);
+    expect(game.scoreOfPlayer(2).equals(deuceScore)).toBe(true);
   });
 
-  it('handles when players are deuced and one of them scores', () => {
-    const game = aGameWithDeucedPlayers();
+  it('handles when game is at deuce and one of them scores', () => {
+    const game = aGameWithDeuce();
 
     game.winPointForPlayer(1);
 
@@ -87,11 +87,11 @@ describe('Tennis Scoring kata', () => {
 
     game.winPointForPlayer(playerWithoutAdvantage);
 
-    const deucedScore = Score.ofDeuced();
+    const deuceScore = Score.ofDeuce();
     expect(game.completed()).toBe(false);
     expect(game.winner()).toBe(undefined);
-    expect(game.scoreOfPlayer(1).equals(deucedScore)).toBe(true);
-    expect(game.scoreOfPlayer(2).equals(deucedScore)).toBe(true);
+    expect(game.scoreOfPlayer(1).equals(deuceScore)).toBe(true);
+    expect(game.scoreOfPlayer(2).equals(deuceScore)).toBe(true);
   });
 
   it('handles when a game is completed and we try to win a point for a player', () => {
@@ -103,7 +103,7 @@ describe('Tennis Scoring kata', () => {
   });
 });
 
-function aGameWithDeucedPlayers() {
+function aGameWithDeuce() {
   const game = new Game();
 
   game.winPointForPlayer(1);
@@ -118,13 +118,13 @@ function aGameWithDeucedPlayers() {
 }
 
 function aGameWithPlayerHavingAdvantage(playerNumber: PlayerNumber) {
-  const game = aGameWithDeucedPlayers();
+  const game = aGameWithDeuce();
   game.winPointForPlayer(playerNumber);
   return game;
 }
 
 function aCompletedGame() {
-  const game = aGameWithDeucedPlayers();
+  const game = aGameWithDeuce();
   game.winPointForPlayer(1);
   game.winPointForPlayer(1);
 

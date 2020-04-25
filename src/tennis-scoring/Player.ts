@@ -9,11 +9,11 @@ export class Player {
     this._score = this._score.next();
   }
 
-  setDeuced() {
-    this._score = Score.ofDeuced();
+  setDeuceScore() {
+    this._score = Score.ofDeuce();
   }
 
-  unsetDeuced() {
+  unsetDeuceScore() {
     this._score = Score.of40();
   }
 
@@ -21,8 +21,8 @@ export class Player {
     return this._score.equals(score);
   }
 
-  isDeuced(): boolean {
-    return this.hasScore(Score.ofDeuced());
+  hasDeuceScore(): boolean {
+    return this.hasScore(Score.ofDeuce());
   }
 
   hasAdvantage(): boolean {

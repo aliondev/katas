@@ -12,8 +12,8 @@ export class Score {
   static of40(): Score {
     return new Score(ScoreValue.FOURTY);
   }
-  static ofDeuced(): Score {
-    return new Score(ScoreValue.DEUCED);
+  static ofDeuce(): Score {
+    return new Score(ScoreValue.DEUCE);
   }
   static ofAdvantage(): Score {
     return new Score(ScoreValue.ADVANTAGE);
@@ -29,7 +29,7 @@ export class Score {
         return Score.of30();
       case ScoreValue.THIRTY:
         return Score.of40();
-      case ScoreValue.DEUCED:
+      case ScoreValue.DEUCE:
         return Score.ofAdvantage();
       default:
         return Score.ofGame();
@@ -45,7 +45,7 @@ enum ScoreValue {
   FIFTEEN = '15',
   THIRTY = '30',
   FOURTY = '40',
-  DEUCED = 'DEUCED',
+  DEUCE = 'DEUCE',
   ADVANTAGE = 'ADVANTAGE',
   GAME = 'GAME',
 }
