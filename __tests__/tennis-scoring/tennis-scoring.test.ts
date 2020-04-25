@@ -40,6 +40,39 @@ describe('Tennis Scoring kata', () => {
     expect(game.completed()).toBe(true);
     expect(game.winner()).toBe(playerNumber);
   });
+
+  it('handles the deuced case', () => {
+    const game = new Game();
+    const deucedScore = Score.ofDeuced();
+
+    game.winPointForPlayer(1);
+    game.winPointForPlayer(1);
+    game.winPointForPlayer(1);
+
+    game.winPointForPlayer(2);
+    game.winPointForPlayer(2);
+    game.winPointForPlayer(2);
+
+    expect(game.scoreOfPlayer(1).equals(deucedScore)).toBe(true);
+    expect(game.scoreOfPlayer(2).equals(deucedScore)).toBe(true);
+  });
+
+  it('handles when players are deuced and one of them scores', () => {
+    const game = new Game();
+
+    game.winPointForPlayer(1);
+    game.winPointForPlayer(1);
+    game.winPointForPlayer(1);
+
+    game.winPointForPlayer(2);
+    game.winPointForPlayer(2);
+    game.winPointForPlayer(2);
+
+    game.winPointForPlayer(1);
+
+    expect(game.scoreOfPlayer(1).equals(Score.ofAdvantage())).toBe(true);
+    expect(game.scoreOfPlayer(2).equals(Score.of40())).toBe(true);
+  });
 });
 
 function aPlayerNumber(): PlayerNumber {

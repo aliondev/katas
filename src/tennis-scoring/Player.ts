@@ -7,4 +7,14 @@ export class Player {
   winPoint(): void {
     this._score = this._score.next();
   }
+  setDeuced() {
+    this._score = Score.ofDeuced();
+  }
+  removeDeuced() {
+    this._score = Score.of40();
+  }
+
+  isDeuced(): boolean {
+    return this._score.equals(Score.ofDeuced());
+  }
 }
