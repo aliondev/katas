@@ -29,17 +29,11 @@ export class Game {
       this.player2.setDeuced();
     }
 
-    if (
-      this.player1.isDeuced() &&
-      this.player2.score().equals(Score.ofAdvantage())
-    ) {
+    if (this.player1.isDeuced() && this.player2.hasAdvantage()) {
       this.player1.removeDeuced();
     }
 
-    if (
-      this.player2.isDeuced() &&
-      this.player1.score().equals(Score.ofAdvantage())
-    ) {
+    if (this.player2.isDeuced() && this.player1.hasAdvantage()) {
       this.player2.removeDeuced();
     }
   }

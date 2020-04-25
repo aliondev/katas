@@ -17,4 +17,7 @@ export class Player {
   isDeuced(): boolean {
     return this._score.equals(Score.ofDeuced());
   }
+  hasAdvantage(): boolean {
+    return this._score.equals(Score.ofAdvantage());
+  }
 }
