@@ -13,24 +13,16 @@ export class Game {
   }
 
   winPointForPlayer(playerNumber: PlayerNumber) {
-    if (this.player1.isDeuced()) {
-      if (playerNumber === 1) {
-        this.player1.winPoint();
-        this.player2.removeDeuced();
-      } else {
-        this.player2.winPoint();
-        this.player1.removeDeuced();
-      }
-
-      return;
-    }
-
     if (playerNumber === 1) {
       this.player1.winPoint();
     } else {
       this.player2.winPoint();
     }
 
+    this.manageDeuce();
+  }
+
+  private manageDeuce() {
     const bothHave40 =
       this.player1.score().equals(Score.of40()) &&
       this.player2.score().equals(Score.of40());
@@ -38,6 +30,20 @@ export class Game {
     if (bothHave40) {
       this.player1.setDeuced();
       this.player2.setDeuced();
+    }
+
+    if (
+      this.player1.isDeuced() &&
+      this.player2.score().equals(Score.ofAdvantage())
+    ) {
+      this.player1.removeDeuced();
+    }
+
+    if (
+      this.player2.isDeuced() &&
+      this.player1.score().equals(Score.ofAdvantage())
+    ) {
+      this.player2.removeDeuced();
     }
   }
 
