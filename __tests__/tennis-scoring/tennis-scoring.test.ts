@@ -6,19 +6,19 @@ describe('Tennis Scoring kata', () => {
   it('allows players to score', () => {
     const player = new Player();
 
-    expect(player.score().equals(Score.of0())).toBe(true);
+    expect(player.hasScore(Score.of0())).toBe(true);
 
     player.winPoint();
-    expect(player.score().equals(Score.of15())).toBe(true);
+    expect(player.hasScore(Score.of15())).toBe(true);
 
     player.winPoint();
-    expect(player.score().equals(Score.of30())).toBe(true);
+    expect(player.hasScore(Score.of30())).toBe(true);
 
     player.winPoint();
-    expect(player.score().equals(Score.of40())).toBe(true);
+    expect(player.hasScore(Score.of40())).toBe(true);
 
     player.winPoint();
-    expect(player.score().equals(Score.ofGame())).toBe(true);
+    expect(player.hasScore(Score.ofGame())).toBe(true);
   });
 
   it('does not have a winner and is not completed when it starts', () => {
