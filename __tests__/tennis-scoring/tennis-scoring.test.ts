@@ -1,4 +1,3 @@
-import { Player } from '../../src/tennis-scoring/Player';
 import { Score } from '../../src/tennis-scoring/Score';
 import { Game, PlayerNumber } from '../../src/tennis-scoring/Game';
 
