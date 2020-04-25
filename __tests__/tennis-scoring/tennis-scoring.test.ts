@@ -21,20 +21,32 @@ describe('Tennis Scoring kata', () => {
     expect(player.score().equals(Score.ofGame())).toBe(true);
   });
 
+  it('does not have a winner and is not completed when it starts', () => {
+    const game = new Game();
+
+    expect(game.completed()).toBe(false);
+    expect(game.winner()).toBe(undefined);
+  });
+
+  it('does not have a winner and is not completed if a player has not reach the max score', () => {
+    const game = new Game();
+    const playerNumber = aPlayerNumber();
+
+    game.winPointForPlayer(playerNumber);
+    game.winPointForPlayer(playerNumber);
+    game.winPointForPlayer(playerNumber);
+
+    expect(game.completed()).toBe(false);
+    expect(game.winner()).toBe(undefined);
+  });
+
   it('makes the game able to be completed with a winner', () => {
     const game = new Game();
     const playerNumber = aPlayerNumber();
 
-    expect(game.completed()).toBe(false);
-    expect(game.winner()).toBe(undefined);
-
     game.winPointForPlayer(playerNumber);
     game.winPointForPlayer(playerNumber);
     game.winPointForPlayer(playerNumber);
-
-    expect(game.completed()).toBe(false);
-    expect(game.winner()).toBe(undefined);
-
     game.winPointForPlayer(playerNumber);
 
     expect(game.completed()).toBe(true);
