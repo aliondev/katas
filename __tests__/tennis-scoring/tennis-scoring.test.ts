@@ -69,6 +69,17 @@ describe('Tennis Scoring kata', () => {
     expect(game.scoreOfPlayer(1).equals(Score.ofAdvantage())).toBe(true);
     expect(game.scoreOfPlayer(2).equals(Score.of40())).toBe(true);
   });
+
+  it('handles when a player with advantage win a point', () => {
+    const game = aGameWithDeucedPlayers();
+    const playerNumber = aPlayerNumber();
+
+    game.winPointForPlayer(playerNumber);
+    game.winPointForPlayer(playerNumber);
+
+    expect(game.completed()).toBe(true);
+    expect(game.winner()).toBe(playerNumber);
+  });
 });
 
 function aGameWithDeucedPlayers() {
