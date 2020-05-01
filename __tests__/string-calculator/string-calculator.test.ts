@@ -23,4 +23,14 @@ describe('String Calculator', () => {
     expect(sum30plus10).toBe(40);
     expect(sum30plus30).toBe(60);
   });
+
+  it('returns the sum of any amount of values', () => {
+    const sum1to3 = stringCalculator.add('1,2,3');
+    const sum1to5 = stringCalculator.add('1,2,3,4,5');
+    const sum1to10 = stringCalculator.add('1,2,3,4,5,6,7,8,9,10');
+
+    expect(sum1to3).toBe(6);
+    expect(sum1to5).toBe(15);
+    expect(sum1to10).toBe(55);
+  });
 });

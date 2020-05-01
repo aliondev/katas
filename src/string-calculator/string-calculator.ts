@@ -1,12 +1,17 @@
 export class StringCalculator {
   add(values: string): number {
-    const [value1, value2] = values.split(',');
-    if (!value1) {
+    const numbers = values.split(',').map((value) => parseInt(value));
+
+    if (!numbers[0]) {
       return 0;
     }
-    if (!value2) {
+    if (!numbers[1]) {
       return parseInt(values);
     }
-    return parseInt(value1) + parseInt(value2);
+
+    return numbers.reduce((acc, curr) => {
+      acc += curr;
+      return acc;
+    }, 0);
   }
 }
