@@ -33,4 +33,14 @@ describe('String Calculator', () => {
     expect(sumFrom1to5).toBe(15);
     expect(sumFrom1to10).toBe(55);
   });
+
+  it('accepts new line character as separator', () => {
+    const withOnlyCommas = stringCalculator.add('1,2,3');
+    const withBothSeparators = stringCalculator.add('1\n2,3');
+    const withOnlyNewLine = stringCalculator.add('1\n2\n3');
+
+    expect(withOnlyCommas).toBe(6);
+    expect(withBothSeparators).toBe(6);
+    expect(withOnlyNewLine).toBe(6);
+  });
 });
