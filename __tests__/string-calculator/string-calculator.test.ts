@@ -8,4 +8,12 @@ describe('String Calculator', () => {
 
     expect(result).toBe(0);
   });
+
+  it('returns the same value if receives just one number', () => {
+    const stringCalculator = new StringCalculator();
+
+    const result = stringCalculator.add('30');
+
+    expect(result).toBe(30);
+  });
 });
