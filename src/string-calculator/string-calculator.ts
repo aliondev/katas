@@ -5,9 +5,6 @@ export class StringCalculator {
     if (!numbers[0]) {
       return 0;
     }
-    if (!numbers[1]) {
-      return parseInt(values);
-    }
 
     return numbers.reduce((acc, curr) => {
       acc += curr;
