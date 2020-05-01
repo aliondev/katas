@@ -25,12 +25,12 @@ describe('String Calculator', () => {
   });
 
   it('returns the sum of any amount of values', () => {
-    const sum1to3 = stringCalculator.add('1,2,3');
-    const sum1to5 = stringCalculator.add('1,2,3,4,5');
-    const sum1to10 = stringCalculator.add('1,2,3,4,5,6,7,8,9,10');
+    const sumFrom1to3 = stringCalculator.add('1,2,3');
+    const sumFrom1to5 = stringCalculator.add('1,2,3,4,5');
+    const sumFrom1to10 = stringCalculator.add('1,2,3,4,5,6,7,8,9,10');
 
-    expect(sum1to3).toBe(6);
-    expect(sum1to5).toBe(15);
-    expect(sum1to10).toBe(55);
+    expect(sumFrom1to3).toBe(6);
+    expect(sumFrom1to5).toBe(15);
+    expect(sumFrom1to10).toBe(55);
   });
 });
