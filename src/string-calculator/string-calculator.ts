@@ -1,9 +1,10 @@
 export class StringCalculator {
-  private extractCustomSeparator(values: string): string | undefined {
+  private getSepator(values: string): string | RegExp {
+    const DEFAULT_SEPARATOR = /[,\n]/;
     const hasCustomSeparator = values.indexOf(`//`) === 0;
 
     if (!hasCustomSeparator) {
-      return undefined;
+      return DEFAULT_SEPARATOR;
     }
 
     const newLinePosition = values.search(/\n/);
@@ -13,10 +14,8 @@ export class StringCalculator {
   }
 
   private extractNumbers(values: string): Array<number> {
-    const DEFAULT_SEPARATOR = /[,\n]/;
-    const customSeparator = this.extractCustomSeparator(values);
-    const sanitizedValues = values.replace(`//${customSeparator}\n`, '');
-    const separator = customSeparator || DEFAULT_SEPARATOR;
+    const separator = this.getSepator(values);
+    const sanitizedValues = values.replace(`//${separator}\n`, '');
 
     const numbers = sanitizedValues
       .split(separator)
