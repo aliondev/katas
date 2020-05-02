@@ -15,16 +15,11 @@ export class StringCalculator {
   private extractNumbers(values: string): Array<number> {
     const DEFAULT_SEPARATOR = /[,\n]/;
     const customSeparator = this.extractCustomSeparator(values);
+    const sanitizedValues = values.replace(`//${customSeparator}\n`, '');
+    const separator = customSeparator || DEFAULT_SEPARATOR;
 
-    if (customSeparator) {
-      return values
-        .replace(`//${customSeparator}\n`, '')
-        .split(customSeparator)
-        .map((value) => parseInt(value));
-    }
-
-    const numbers = values
-      .split(DEFAULT_SEPARATOR)
+    const numbers = sanitizedValues
+      .split(separator)
       .map((value) => parseInt(value));
 
     return numbers;
