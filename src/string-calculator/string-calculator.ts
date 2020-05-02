@@ -17,6 +17,10 @@ export class StringCalculator {
     const separator = this.getSepator(values);
     const sanitizedValues = values.replace(`//${separator}\n`, '');
 
+    if (!sanitizedValues) {
+      return [];
+    }
+
     const numbers = sanitizedValues
       .split(separator)
       .map((value) => parseInt(value));
@@ -26,10 +30,6 @@ export class StringCalculator {
 
   add(values: string): number {
     const numbers = this.extractNumbers(values);
-
-    if (!numbers[0]) {
-      return 0;
-    }
 
     return numbers.reduce((acc, curr) => {
       acc += curr;
