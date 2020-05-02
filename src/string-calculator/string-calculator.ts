@@ -29,9 +29,13 @@ export class StringCalculator {
   }
 
   private ensureNumbers(numbers: Array<number>): void {
-    numbers.forEach((num) => {
-      if (num < 0) throw new Error(`negatives not allowed ${num}`);
+    const negativeNumbers = numbers.filter((num) => {
+      if (num < 0) return num;
     });
+
+    if (negativeNumbers.length) {
+      throw new Error(`negatives not allowed ${negativeNumbers.toString()}`);
+    }
   }
 
   add(values: string): number {

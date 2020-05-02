@@ -69,6 +69,18 @@ describe('String Calculator', () => {
       done();
     }
   });
+
+  it('should throw an exception if there are several negative numbers', (done) => {
+    const values = '-1,-2,3';
+    const expectedError = 'negatives not allowed -1,-2';
+
+    try {
+      stringCalculator.add(values);
+    } catch (error) {
+      expect(error.message).toBe(expectedError);
+      done();
+    }
+  });
 });
 
 const buildValuesWithCustomSeparator = (
