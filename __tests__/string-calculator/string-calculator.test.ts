@@ -57,6 +57,18 @@ describe('String Calculator', () => {
     expect(resultWithAt).toBe(6);
     expect(resultWithDot).toBe(6);
   });
+
+  it('should throw an exception if there is a negative number', (done) => {
+    const values = '-1,2,3';
+    const expectedError = 'negatives not allowed -1';
+
+    try {
+      stringCalculator.add(values);
+    } catch (error) {
+      expect(error.message).toBe(expectedError);
+      done();
+    }
+  });
 });
 
 const buildValuesWithCustomSeparator = (

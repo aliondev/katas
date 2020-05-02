@@ -28,9 +28,15 @@ export class StringCalculator {
     return numbers;
   }
 
+  private ensureNumbers(numbers: Array<number>): void {
+    numbers.forEach((num) => {
+      if (num < 0) throw new Error(`negatives not allowed ${num}`);
+    });
+  }
+
   add(values: string): number {
     const numbers = this.extractNumbers(values);
-
+    this.ensureNumbers(numbers);
     return numbers.reduce((acc, curr) => {
       acc += curr;
       return acc;
