@@ -43,4 +43,28 @@ describe('String Calculator', () => {
     expect(withBothSeparators).toBe(6);
     expect(withOnlyNewLine).toBe(6);
   });
+
+  it('accepts custom separators specified at the beggining at the string using a //DELIMITER/\n pattern', () => {
+    const AT = '@';
+    const DOT = '.';
+    const numbers = [1, 2, 3];
+    const valuesWithDot = buildValuesWithCustomSeparator(DOT, numbers);
+    const valuesWithAt = buildValuesWithCustomSeparator(AT, numbers);
+
+    const resultWithAt = stringCalculator.add(valuesWithAt);
+    const resultWithDot = stringCalculator.add(valuesWithDot);
+
+    expect(resultWithAt).toBe(6);
+    expect(resultWithDot).toBe(6);
+  });
 });
+
+const buildValuesWithCustomSeparator = (
+  customSeparator: string,
+  numbers: Array<number>,
+): string => {
+  const header = `//${customSeparator}\n`;
+  const separatedNumbers = numbers.join(customSeparator);
+
+  return `${header}${separatedNumbers}`;
+};
