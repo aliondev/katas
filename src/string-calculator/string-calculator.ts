@@ -38,10 +38,18 @@ export class StringCalculator {
     }
   }
 
+  private filterTooBigNumbers(numbers: Array<number>): Array<number> {
+    return numbers.filter(num => num <= 1000);
+  }
+
   add(values: string): number {
     const numbers = this.extractNumbers(values);
+
     this.ensureNumbers(numbers);
-    return numbers.reduce((acc, curr) => {
+
+    const numbersLowerThanThousand = this.filterTooBigNumbers(numbers);
+
+    return numbersLowerThanThousand.reduce((acc, curr) => {
       acc += curr;
       return acc;
     }, 0);

@@ -81,6 +81,14 @@ describe('String Calculator', () => {
       done();
     }
   });
+
+  it('does not take into account numbers bigger than 1000', () => {
+    const values = '5,10,1001';
+
+    const result = stringCalculator.add(values);
+
+    expect(result).toBe(15);
+  })
 });
 
 const buildValuesWithCustomSeparator = (
