@@ -13,7 +13,7 @@ export class StringCalculator {
     return customSeparator;
   }
 
-  private extractNumbers(values: string): Array<number> {
+  private numbersFromString(values: string): Array<number> {
     const separator = this.getSepator(values);
     const sanitizedValues = values.replace(`//${separator}\n`, '');
 
@@ -28,7 +28,7 @@ export class StringCalculator {
     return numbers;
   }
 
-  private ensureNumbers(numbers: Array<number>): void {
+  private ensureNumbersArePositive(numbers: Array<number>): void {
     const negativeNumbers = numbers.filter((num) => {
       if (num < 0) return num;
     });
@@ -43,9 +43,9 @@ export class StringCalculator {
   }
 
   add(values: string): number {
-    const numbers = this.extractNumbers(values);
+    const numbers = this.numbersFromString(values);
 
-    this.ensureNumbers(numbers);
+    this.ensureNumbersArePositive(numbers);
 
     const numbersLowerThanThousand = this.filterTooBigNumbers(numbers);
 
