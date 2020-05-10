@@ -3,19 +3,33 @@ export class StringCalculator {
     const DEFAULT_SEPARATOR = /[,\n]/;
     const hasCustomSeparator = values.indexOf(`//`) === 0;
 
-    if (!hasCustomSeparator) {
-      return DEFAULT_SEPARATOR;
-    }
+    return hasCustomSeparator
+      ? this.getCustomSeparator(values)
+      : DEFAULT_SEPARATOR;
+  }
 
+  private headerHasWrappingBrackets(values: string): boolean {
     const newLinePosition = values.search(/\n/);
-    const customSeparator = values.slice(2, newLinePosition);
+    const header = values.slice(2, newLinePosition);
+    const hasWrappingBrackets = header[0] === '[' && header[header.length - 1] === ']';
 
-    return customSeparator;
+    return hasWrappingBrackets;
+  }
+
+  private getCustomSeparator(values: string): string {
+    const newLinePosition = values.search(/\n/);
+    const header = values.slice(2, newLinePosition);
+
+    return this.headerHasWrappingBrackets(values)
+      ? header.replace('[', '').replace(']', '')
+      : header;
   }
 
   private numbersFromString(values: string): Array<number> {
     const separator = this.getSepator(values);
-    const sanitizedValues = values.replace(`//${separator}\n`, '');
+    const sanitizedValues = this.headerHasWrappingBrackets(values)
+      ? values.replace(`//[${separator}]\n`, '')
+      : values.replace(`//${separator}\n`, '');
 
     if (!sanitizedValues) {
       return [];

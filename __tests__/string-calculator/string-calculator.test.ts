@@ -88,8 +88,22 @@ describe('String Calculator', () => {
     const result = stringCalculator.add(values);
 
     expect(result).toBe(15);
-  })
+  });
+
+  it('accepts delimiters with any length following the format "//[delimiter]/n"', () => {
+    const delimiter = aRandomAmountOfEqualsSymbols();
+    const values = `//[${delimiter}]\n1${delimiter}2${delimiter}3`;
+
+    const result = stringCalculator.add(values);
+
+    expect(result).toBe(6);
+  });
 });
+
+const aRandomAmountOfEqualsSymbols = () => {
+  const randomValueFrom1to10 = Math.ceil(Math.random() * 10);
+  return new Array(randomValueFrom1to10).map(() => '=').toString();
+}
 
 const buildValuesWithCustomSeparator = (
   customSeparator: string,
