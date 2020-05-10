@@ -1,28 +1,15 @@
 export class StringCalculator {
-  private getSepator(values: string): string | RegExp {
-    const DEFAULT_SEPARATOR = /[,\n]/;
-    const hasCustomSeparator = values.indexOf(`//`) === 0;
+  add(values: string): number {
+    const numbers = this.numbersFromString(values);
 
-    return hasCustomSeparator
-      ? this.getCustomSeparator(values)
-      : DEFAULT_SEPARATOR;
-  }
+    this.ensureNumbersArePositive(numbers);
 
-  private headerHasWrappingBrackets(values: string): boolean {
-    const newLinePosition = values.search(/\n/);
-    const header = values.slice(2, newLinePosition);
-    const hasWrappingBrackets = header[0] === '[' && header[header.length - 1] === ']';
+    const numbersLowerThanThousand = this.filterTooBigNumbers(numbers);
 
-    return hasWrappingBrackets;
-  }
-
-  private getCustomSeparator(values: string): string {
-    const newLinePosition = values.search(/\n/);
-    const header = values.slice(2, newLinePosition);
-
-    return this.headerHasWrappingBrackets(values)
-      ? header.replace('[', '').replace(']', '')
-      : header;
+    return numbersLowerThanThousand.reduce((acc, curr) => {
+      acc += curr;
+      return acc;
+    }, 0);
   }
 
   private numbersFromString(values: string): Array<number> {
@@ -56,16 +43,29 @@ export class StringCalculator {
     return numbers.filter(num => num <= 1000);
   }
 
-  add(values: string): number {
-    const numbers = this.numbersFromString(values);
+  private getSepator(values: string): string | RegExp {
+    const DEFAULT_SEPARATOR = /[,\n]/;
+    const hasCustomSeparator = values.indexOf(`//`) === 0;
 
-    this.ensureNumbersArePositive(numbers);
+    return hasCustomSeparator
+      ? this.getCustomSeparator(values)
+      : DEFAULT_SEPARATOR;
+  }
 
-    const numbersLowerThanThousand = this.filterTooBigNumbers(numbers);
+  private getCustomSeparator(values: string): string {
+    const newLinePosition = values.search(/\n/);
+    const header = values.slice(2, newLinePosition);
 
-    return numbersLowerThanThousand.reduce((acc, curr) => {
-      acc += curr;
-      return acc;
-    }, 0);
+    return this.headerHasWrappingBrackets(values)
+      ? header.replace('[', '').replace(']', '')
+      : header;
+  }
+
+  private headerHasWrappingBrackets(values: string): boolean {
+    const newLinePosition = values.search(/\n/);
+    const header = values.slice(2, newLinePosition);
+    const hasWrappingBrackets = header[0] === '[' && header[header.length - 1] === ']';
+
+    return hasWrappingBrackets;
   }
 }
