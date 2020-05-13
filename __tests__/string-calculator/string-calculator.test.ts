@@ -108,6 +108,16 @@ describe('String Calculator', () => {
 
     expect(result).toBe(15);
   });
+
+  it('allows multiple delimiters with more than one character wrapped by brackets', () => {
+    const THREE_ATS = '@@@';
+    const SIX_DOLLARS = '$$$$$$';
+    const values = `//[${THREE_ATS}][${SIX_DOLLARS}]\n1${THREE_ATS}2${SIX_DOLLARS}3${THREE_ATS}4`;
+
+    const result = stringCalculator.add(values);
+
+    expect(result).toBe(10);
+  });
 });
 
 const aRandomAmountOfEqualsSymbols = () => {
