@@ -14,12 +14,12 @@ export class StringCalculator {
 
   private numbersFromString(values: string): Array<number> {
     const header = this.getHeader(values);
-    const separator = this.getSeparatorsRegex(header);
+    const separatorsRegex = this.getSeparatorsRegex(header);
     const valuesWithoutHeader = values.replace(header, '');
 
     const numbers = valuesWithoutHeader
-      .split(separator)
-      .map((value) => parseInt(value));
+      .split(separatorsRegex)
+      .map(value=> parseInt(value));
 
     return numbers;
   }
