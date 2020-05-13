@@ -5,11 +5,9 @@ export class StringCalculator {
     this.ensureNumbersArePositive(numbers);
 
     const numbersLowerThanThousand = this.filterTooBigNumbers(numbers);
+    const total = numbersLowerThanThousand.reduce((acc, curr) => acc + curr, 0);
 
-    return numbersLowerThanThousand.reduce((acc, curr) => {
-      acc += curr;
-      return acc;
-    }, 0);
+    return total;
   }
 
   private numbersFromString(values: string): Array<number> {
@@ -17,11 +15,9 @@ export class StringCalculator {
     const separatorsRegex = this.getSeparatorsRegex(header);
     const valuesWithoutHeader = values.replace(header, '');
 
-    const numbers = valuesWithoutHeader
+    return valuesWithoutHeader
       .split(separatorsRegex)
       .map(value=> parseInt(value));
-
-    return numbers;
   }
 
   private ensureNumbersArePositive(numbers: Array<number>): void {
