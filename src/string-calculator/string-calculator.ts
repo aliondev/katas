@@ -25,9 +25,7 @@ export class StringCalculator {
   }
 
   private ensureNumbersArePositive(numbers: Array<number>): void {
-    const negativeNumbers = numbers.filter((num) => {
-      if (num < 0) return num;
-    });
+    const negativeNumbers = numbers.filter(num => num < 0);
 
     if (negativeNumbers.length) {
       throw new Error(`negatives not allowed ${negativeNumbers.toString()}`);
