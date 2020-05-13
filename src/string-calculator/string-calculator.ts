@@ -48,9 +48,11 @@ export class StringCalculator {
   private getSeparatorsRegex(values: string): RegExp {
     const DEFAULT_SEPARATORS = [',','\n'];
     const header = this.getHeader(values);
+
     const separatorsInHeader = header.split('[')
       .map(item => item.split(']').join(''))
-      .filter(item => !!item);
+      .filter(item => item);
+
 
     const separators = separatorsInHeader.length ? separatorsInHeader : DEFAULT_SEPARATORS;
 
