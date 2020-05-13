@@ -37,10 +37,10 @@ export class StringCalculator {
   }
 
   private getHeader(values: string): string {
-    const hasCustomSeparator = values.indexOf(`//`) === 0;
+    const hasHeader = values.indexOf(`//`) === 0;
     const newLinePosition = values.search(/\n/);
 
-    if (!hasCustomSeparator) { return ''; }
+    if (!hasHeader) { return ''; }
 
     return values.slice(0, newLinePosition + 1);
   }
