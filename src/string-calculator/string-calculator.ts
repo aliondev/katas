@@ -13,16 +13,11 @@ export class StringCalculator {
   }
 
   private numbersFromString(values: string): Array<number> {
-    const separator = this.getSepator(values);
-    const sanitizedValues = this.headerHasWrappingBrackets(values)
-      ? values.replace(`//[${separator}]\n`, '')
-      : values.replace(`//${separator}\n`, '');
+    const header = this.getHeader(values);
+    const separator = this.getSeparatorsRegex(header);
+    const valuesWithoutHeader = values.replace(header, '');
 
-    if (!sanitizedValues) {
-      return [];
-    }
-
-    const numbers = sanitizedValues
+    const numbers = valuesWithoutHeader
       .split(separator)
       .map((value) => parseInt(value));
 
@@ -43,29 +38,24 @@ export class StringCalculator {
     return numbers.filter(num => num <= 1000);
   }
 
-  private getSepator(values: string): string | RegExp {
-    const DEFAULT_SEPARATOR = /[,\n]/;
+  private getHeader(values: string): string {
     const hasCustomSeparator = values.indexOf(`//`) === 0;
+    const newLinePosition = values.search(/\n/);
 
-    return hasCustomSeparator
-      ? this.getCustomSeparator(values)
-      : DEFAULT_SEPARATOR;
+    if (!hasCustomSeparator) { return ''; }
+
+    return values.slice(0, newLinePosition + 1);
   }
 
-  private getCustomSeparator(values: string): string {
-    const newLinePosition = values.search(/\n/);
-    const header = values.slice(2, newLinePosition);
+  private getSeparatorsRegex(values: string): RegExp {
+    const DEFAULT_SEPARATORS = [',','\n'];
+    const header = this.getHeader(values);
+    const separatorsInHeader = header.split('[')
+      .map(item => item.split(']').join(''))
+      .filter(item => !!item);
 
-    return this.headerHasWrappingBrackets(values)
-      ? header.replace('[', '').replace(']', '')
-      : header;
-  }
+    const separators = separatorsInHeader.length ? separatorsInHeader : DEFAULT_SEPARATORS;
 
-  private headerHasWrappingBrackets(values: string): boolean {
-    const newLinePosition = values.search(/\n/);
-    const header = values.slice(2, newLinePosition);
-    const hasWrappingBrackets = header[0] === '[' && header[header.length - 1] === ']';
-
-    return hasWrappingBrackets;
+    return new RegExp(`[${separators.join(',')}]`)
   }
 }
