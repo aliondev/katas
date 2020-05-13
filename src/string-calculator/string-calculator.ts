@@ -47,13 +47,10 @@ export class StringCalculator {
 
   private getSeparatorsRegex(values: string): RegExp {
     const DEFAULT_SEPARATORS = [',','\n'];
+    const BRACKETS_REGEX = /[\[\]]/;
     const header = this.getHeader(values);
 
-    const separatorsInHeader = header.split('[')
-      .map(item => item.split(']').join(''))
-      .filter(item => item);
-
-
+    const separatorsInHeader = header.split(BRACKETS_REGEX).filter(item => item);
     const separators = separatorsInHeader.length ? separatorsInHeader : DEFAULT_SEPARATORS;
 
     return new RegExp(`[${separators.join(',')}]`)
