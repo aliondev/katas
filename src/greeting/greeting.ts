@@ -1,5 +1,7 @@
 export class Greeting {
   greet(name: string): string {
-    return `Hello, ${name}.`;
+    const target = name === null ? 'my friend' : name;
+
+    return `Hello, ${target}.`;
   }
 }

@@ -8,4 +8,10 @@ describe('Greeting kata', () => {
         expect(greeting.greet('Louis')).toBe('Hello, Louis.');
         expect(greeting.greet('Thomas')).toBe('Hello, Thomas.');
     });
+
+    it('handles null name greeting to a friend', () => {
+        const greeting = new Greeting();
+
+        expect(greeting.greet(null)).toBe('Hello, my friend.');
+    });
 });
