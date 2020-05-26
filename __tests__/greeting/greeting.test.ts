@@ -14,4 +14,11 @@ describe('Greeting kata', () => {
 
         expect(greeting.greet(null)).toBe('Hello, my friend.');
     });
+
+    it('shouts to the person if the name has all its letters uppercase', () => {
+        const greeting = new Greeting();
+        expect(greeting.greet('JOHN')).toBe('HELLO, JOHN!');
+        expect(greeting.greet('LOUIS')).toBe('HELLO, LOUIS!');
+        expect(greeting.greet('THOMAS')).toBe('HELLO, THOMAS!');
+    });
 });
