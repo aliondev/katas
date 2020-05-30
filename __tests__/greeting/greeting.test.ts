@@ -21,4 +21,10 @@ describe('Greeting kata', () => {
         expect(greeting.greet('LOUIS')).toBe('HELLO, LOUIS!');
         expect(greeting.greet('THOMAS')).toBe('HELLO, THOMAS!');
     });
+
+    it('handles two names', () => {
+        const greeting = new Greeting();
+        expect(greeting.greet(['John', 'Louis'])).toBe('Hello, John and Louis.')
+        expect(greeting.greet(['Louis', 'John'])).toBe('Hello, Louis and John.')
+    });
 });
