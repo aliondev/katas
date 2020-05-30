@@ -1,5 +1,6 @@
 export class Greeting {
   private readonly HELLO = 'Hello';
+  private readonly AND = 'AND';
 
   greet(target: string | Array<string>): string {
     return Array.isArray(target)
@@ -26,7 +27,7 @@ export class Greeting {
     }
 
     if(normalNames.length && upperCaseNames.length) {
-      return `${this.greetMultipleNormal(normalNames)} AND ${this.greetMultipleShouting(upperCaseNames)}`;
+      return `${this.greetMultipleNormal(normalNames)} ${this.AND} ${this.greetMultipleShouting(upperCaseNames)}`;
     }
   }
 
@@ -37,15 +38,15 @@ export class Greeting {
   }
 
   private greetMultipleNormal(names: Array<string>): string {
-    const AND = 'and';
+    const connector = this.AND.toLowerCase();
 
     if (names.length <= 2) {
-      return `${this.HELLO}, ${names.join(` ${AND} `)}.`;
+      return `${this.HELLO}, ${names.join(` ${connector} `)}.`;
     }
 
     const namesWithoutLast = names.slice(0, -1);
     const lastOfNames = names[names.length - 1];
 
-    return `${this.HELLO}, ${namesWithoutLast.join(', ')} ${AND} ${lastOfNames}.`;
+    return `${this.HELLO}, ${namesWithoutLast.join(', ')} ${connector} ${lastOfNames}.`;
   }
 }
