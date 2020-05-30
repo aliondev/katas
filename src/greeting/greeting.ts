@@ -11,7 +11,11 @@ export class Greeting {
   }
 
   private greetMultiple(names: Array<string>): string {
-    return `Hello, ${names.join(' and ')}.`;
+    if (names.length <= 2) {
+      return `Hello, ${names.join(' and ')}.`;
+    }
+
+    return `Hello, ${names.slice(0, -1).join(', ')} and ${names[names.length -1]}.`;
   }
 
   greet(target: string | Array<string>): string {

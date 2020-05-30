@@ -27,4 +27,10 @@ describe('Greeting kata', () => {
         expect(greeting.greet(['John', 'Louis'])).toBe('Hello, John and Louis.')
         expect(greeting.greet(['Louis', 'John'])).toBe('Hello, Louis and John.')
     });
+
+    it('handles multiple names', () => {
+        const greeting = new Greeting();
+        expect(greeting.greet(['John', 'Louis', 'Tom'])).toBe('Hello, John, Louis and Tom.')
+        expect(greeting.greet(['Louis', 'Tom', 'John'])).toBe('Hello, Louis, Tom and John.')
+    });
 });
