@@ -1,6 +1,8 @@
 export class Greeting {
   private readonly HELLO = 'Hello';
 
+  private isUpperCase(name: string): boolean { return name === name.toUpperCase(); }
+
   private greetSingle(name: string): string {
     const curatedName = name === null ? 'my friend' : name;
 
@@ -12,8 +14,8 @@ export class Greeting {
   }
 
   private greetMultipleMixed(names: Array<string>): string {
-    const namesThatAreLowerCase = names.filter(name => name !== name.toUpperCase());
-    const namesThatAreUpperCase = names.filter(name => name === name.toUpperCase());
+    const namesThatAreUpperCase = names.filter(this.isUpperCase);
+    const namesThatAreLowerCase = names.filter(name => !this.isUpperCase(name));
 
     const greetForLowerCase = this.greetMultipleNormal(namesThatAreLowerCase);
     const greetForUpperCase = 'AND ' + this.greetMultipleShouting(namesThatAreUpperCase);
@@ -22,8 +24,8 @@ export class Greeting {
   }
 
   private greetMultiple(names: Array<string>): string {
-    const hasLowerCaseNames = names.some(name => name !== name.toUpperCase());
-    const hasUpperCaseNames = names.some(name => name === name.toUpperCase());
+    const hasUpperCaseNames = names.some(this.isUpperCase);
+    const hasLowerCaseNames = names.some(name => !this.isUpperCase(name));
 
     if (hasLowerCaseNames && !hasUpperCaseNames) {
       return this.greetMultipleNormal(names);
