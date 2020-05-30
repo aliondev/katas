@@ -20,22 +20,31 @@ describe('Greeting kata', () => {
     });
 
     it('handles two names', () => {
-        expect(greeting.greet(['John', 'Louis'])).toBe('Hello, John and Louis.')
-        expect(greeting.greet(['Louis', 'John'])).toBe('Hello, Louis and John.')
+        expect(greeting.greet(['John', 'Louis'])).toBe('Hello, John and Louis.');
+        expect(greeting.greet(['Louis', 'John'])).toBe('Hello, Louis and John.');
     });
 
     it('handles multiple names', () => {
-        expect(greeting.greet(['John', 'Louis', 'Tom'])).toBe('Hello, John, Louis and Tom.')
-        expect(greeting.greet(['Louis', 'Tom', 'John'])).toBe('Hello, Louis, Tom and John.')
+        expect(greeting.greet(['John', 'Louis', 'Tom']))
+          .toBe('Hello, John, Louis and Tom.');
+
+        expect(greeting.greet(['Louis', 'Tom', 'John']))
+          .toBe('Hello, Louis, Tom and John.');
     });
 
     it('handles mix of shouted and normal names', () => {
-        expect(greeting.greet(['John', 'Louis', 'TOM'])).toBe('Hello, John and Louis. AND HELLO TOM!')
-        expect(greeting.greet(['John', 'LOUIS', 'Tom'])).toBe('Hello, John and Tom. AND HELLO LOUIS!')
-        expect(greeting.greet(['JOHN', 'LOUIS', 'Tom'])).toBe('Hello, Tom. AND HELLO JOHN AND LOUIS!')
+        expect(greeting.greet(['John', 'Louis', 'TOM']))
+          .toBe('Hello, John and Louis. AND HELLO TOM!');
+
+        expect(greeting.greet(['John', 'LOUIS', 'Tom']))
+          .toBe('Hello, John and Tom. AND HELLO LOUIS!');
+
+        expect(greeting.greet(['JOHN', 'LOUIS', 'Tom']))
+          .toBe('Hello, Tom. AND HELLO JOHN AND LOUIS!');
     });
 
     it('splits names with commas in entries', () => {
-        expect(greeting.greet(['John,Bob', 'Michael'])).toBe('Hello, John, Bob and Michael.');
+        expect(greeting.greet(['John,Bob', 'Michael']))
+          .toBe('Hello, John, Bob and Michael.');
     });
 });
