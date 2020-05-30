@@ -1,7 +1,11 @@
 export class Greeting {
   private readonly HELLO = 'Hello';
 
-  private isUpperCase(name: string): boolean { return name === name.toUpperCase(); }
+  greet(target: string | Array<string>): string {
+    return Array.isArray(target)
+      ? this.greetMultiple(target)
+      : this.greetSingle(target);
+  }
 
   private greetSingle(name: string): string {
     const curatedName = name === null ? 'my friend' : name;
@@ -26,6 +30,8 @@ export class Greeting {
     }
   }
 
+  private isUpperCase(name: string): boolean { return name === name.toUpperCase(); }
+
   private greetMultipleShouting(names: Array<string>): string {
     return this.greetMultipleNormal(names).toUpperCase().replace(',', '').replace('.', '!');
   }
@@ -41,11 +47,5 @@ export class Greeting {
     const lastOfNames = names[names.length - 1];
 
     return `${this.HELLO}, ${namesWithoutLast.join(', ')} ${AND} ${lastOfNames}.`;
-  }
-
-  greet(target: string | Array<string>): string {
-    return Array.isArray(target)
-      ? this.greetMultiple(target)
-      : this.greetSingle(target);
   }
 }
