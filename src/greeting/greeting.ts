@@ -19,8 +19,13 @@ export class Greeting {
   }
 
   private greetMultiple(names: Array<string>): string {
-    const upperCaseNames = names.filter(this.isUpperCase);
-    const normalNames = names.filter(name => !this.isUpperCase(name));
+    const commaSeparatedNames = names.reduce((acc, curr) => {
+      curr.split(',').forEach(item => acc.push(item));
+      return acc;
+    }, []);
+
+    const upperCaseNames = commaSeparatedNames.filter(this.isUpperCase);
+    const normalNames = commaSeparatedNames.filter(name => !this.isUpperCase(name));
 
     if (normalNames.length && !upperCaseNames.length) {
       return this.greetMultipleNormal(normalNames);
