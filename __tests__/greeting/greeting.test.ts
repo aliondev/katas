@@ -46,5 +46,8 @@ describe('Greeting kata', () => {
     it('splits names with commas in entries', () => {
       expect(greeting.greet(['John,Bob', 'Michael']))
         .toBe('Hello, John, Bob and Michael.');
+
+      expect(greeting.greet(['John', 'Bob, Michael']))
+        .toBe('Hello, John, Bob and Michael.');
     });
 });

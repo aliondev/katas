@@ -20,7 +20,7 @@ export class Greeting {
 
   private greetMultiple(names: Array<string>): string {
     const commaSeparatedNames = names.reduce((acc, curr) => {
-      curr.split(',').forEach(item => acc.push(item));
+      curr.split(',').forEach(item => acc.push(item.trim()));
       return acc;
     }, []);
 
