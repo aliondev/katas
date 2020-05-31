@@ -18,16 +18,29 @@ export class Greeting {
     return `${this.HELLO}, ${curatedName}.`;
   }
 
-  private greetMultiple(names: Array<string>): string {
-    const commaSeparatedNames = names.reduce((acc, curr) => {
-      curr.replace('\",\"', '$')
-        .split(',')
-        .forEach(item => acc.push(item.trim().replace('$', ',')));
-      return acc;
+  private getSanitizedNames(names: Array<string>) {
+    const INTENTIONAL_COMMA_REGEX = /\",\"/;
+    const TEMPORAL_SEPARATOR = '$TEMPORAL_SEPARATOR$';
+    const COMMA = ',';
+
+    const sanitizedNames = names.reduce((acc, curr) => {
+      const hidingIntentionalComma = hideIntentionalComma(curr);
+      const separatedByComma = splitByComma(hidingIntentionalComma);
+      const withIntentionalCommas = separatedByComma.map(addIntentionalComma);
+      return acc.concat(withIntentionalCommas);
     }, []);
 
-    const upperCaseNames = commaSeparatedNames.filter(this.isUpperCase);
-    const normalNames = commaSeparatedNames.filter(name => !this.isUpperCase(name));
+    return sanitizedNames;
+
+    function hideIntentionalComma(name) { return name.replace(INTENTIONAL_COMMA_REGEX, TEMPORAL_SEPARATOR); }
+    function splitByComma(name) { return name.split(COMMA); }
+    function addIntentionalComma(name) { return name.trim().replace(TEMPORAL_SEPARATOR, COMMA); }
+  }
+
+  private greetMultiple(names: Array<string>): string {
+    const sanitizedNames = this.getSanitizedNames(names);
+    const upperCaseNames = sanitizedNames.filter(this.isUpperCase);
+    const normalNames = sanitizedNames.filter(name => !this.isUpperCase(name));
 
     if (normalNames.length && !upperCaseNames.length) {
       return this.greetMultipleNormal(normalNames);

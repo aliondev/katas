@@ -52,7 +52,10 @@ describe('Greeting kata', () => {
     });
 
     it('allows intentional commas in names when scaped with double quotes', () => {
-      expect(greeting.greet(['John","Bob, Michael']))
+      expect(greeting.greet(['John","Bob', 'Michael']))
         .toBe('Hello, John,Bob and Michael.')
+
+        expect(greeting.greet(['Thomas', 'George', 'John","Bob', 'Michael']))
+        .toBe('Hello, Thomas, George, John,Bob and Michael.')
     });
 });
