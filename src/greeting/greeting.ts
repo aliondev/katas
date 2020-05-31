@@ -33,9 +33,11 @@ export class Greeting {
       return this.greetMultipleNormal(normalNames);
     }
 
-    if(normalNames.length && upperCaseNames.length) {
-      return `${this.greetMultipleNormal(normalNames)} ${this.AND} ${this.greetMultipleShouting(upperCaseNames)}`;
+    if (!normalNames.length && upperCaseNames.length) {
+      return `${this.greetMultipleShouting(upperCaseNames)}`
     }
+
+    return `${this.greetMultipleNormal(normalNames)} ${this.AND} ${this.greetMultipleShouting(upperCaseNames)}`;
   }
 
   private greetMultipleShouting(names: Array<string>): string {

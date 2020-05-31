@@ -43,6 +43,11 @@ describe('Greeting kata', () => {
         .toBe('Hello, Tom. AND HELLO JOHN AND LOUIS!');
     });
 
+    it('handles multiples shouted names', () => {
+      expect(greeting.greet(['JOHN', 'LOUIS', 'TOM']))
+        .toBe('HELLO JOHN, LOUIS AND TOM!');
+    });
+
     it('splits names with commas in entries', () => {
       expect(greeting.greet(['John,Bob', 'Michael']))
         .toBe('Hello, John, Bob and Michael.');
