@@ -11,12 +11,18 @@ export class Greeting {
   private greetSingle(name: string): string {
     const curatedName = name === null ? 'my friend' : name;
 
-    if (curatedName.toUpperCase() === curatedName) {
-      return `${this.HELLO} ${curatedName}!`.toUpperCase()
-    }
-
-    return `${this.HELLO}, ${curatedName}.`;
+    return this.isUpperCase(curatedName)
+      ? this.greetSingleShouting(curatedName)
+      : this.greetSingleNormal(curatedName);
   }
+
+  private greetSingleNormal(name: string): string {
+    return `${this.HELLO}, ${name}.`;
+  }
+
+  private greetSingleShouting(name: string): string {
+    return `${this.HELLO} ${name}!`.toUpperCase()
+  };
 
   private greetMultiple(names: Array<string>): string {
     const sanitizedNames = this.getSanitizedNames(names);
